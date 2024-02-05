@@ -5,6 +5,8 @@ using namespace std;
 
 //function to put the last element in its correct
 //position as per sorted array
+//this function was first thought by me you can find the better
+//version of this code in the function below
 int position(int arr[],int start,int end){
     int n =end-start;
     int a[n];
@@ -35,10 +37,28 @@ int position(int arr[],int start,int end){
     return result;
 }
 
+//function to find correct position of the last element
+//as per the sorted array.
+int position1(int arr[],int start,int end){
+    int j=start-1;
+    for(int i=start;i<end;i++){
+        if(arr[i]<arr[end]){
+            j++;
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    int temp=arr[end];
+    arr[end]=arr[j+1];
+    arr[j+1]=temp;
+    return j+1;
+}
+
 //function to quick sort an array
 void quickSort(int arr[],int start,int end){
     if(start<end){
-        int pos= position(arr,start,end);
+        int pos= position1(arr,start,end);
         quickSort(arr,start,pos-1);
         quickSort(arr,pos+1,end);
     }
