@@ -39,6 +39,11 @@ class taken{
     void getLevel(){
         cout<<level<<endl;
     }
+    taken(taken &temp){
+        this->health= temp.health;
+        this->level= temp.level;
+        this->name= temp.name;
+    }
 };
 
 int main(){
@@ -73,7 +78,14 @@ int main(){
     rohit->getHealth();
     rohit->getLevel();
     cout<<rohit->name<<endl;
+    // delete keyword invokes the distructer as for dynamically allocated object
+    // decstructor is not called automatically
     delete gin;
     delete rohit;
+    // using copy onstructor
+    taken shreyansh(paul);
+    shreyansh.getHealth();
+    shreyansh.getLevel();
+    cout<<shreyansh.name<<endl;
     return 0;
 }
