@@ -60,7 +60,7 @@ void nodeTraversalReverse(node* head){
     }
     cout<<endl;
 }
-
+ 
 // function to reverse a doubly linked list
 node* reverseLinkedList(node* head){
     if(head==NULL)
@@ -168,6 +168,36 @@ node* deleteHeadCircular(node* head){
     return head;
 }
 
+// function to delete the kth element from a circular linked list
+node* deleteKthElement(node* head, int k){
+    if(head==NULL){
+        return NULL;
+    }
+    if(k==1 && head->next==head)
+    return NULL;
+    int i=1;
+    node* curr= head;
+    while(i!=k && curr->next!=head){
+        i++;
+        curr=curr->next;
+    }
+    if(i!=k){
+        cout<<"position to be deleted does not exists"<<endl;
+        return head;
+    }
+    curr->a= curr->next->a;
+    node* temp= curr->next;
+    curr->next= curr->next->next;
+    if(temp==head){
+        delete(temp);
+        return curr;
+    }
+    else{
+        delete(temp);
+        return head;
+    }
+}
+
 int main(){
     // making a doubly linked list (raw method)
     node* head= new node(10);
@@ -211,5 +241,8 @@ int main(){
     nodeTraversalCircular(head1);
     // deleting head of the circular linked list
     head1= deleteHeadCircular(head1);
+    nodeTraversalCircular(head1);
+    // deleting kth element of the circular linked list
+    head1= deleteKthElement(head1,5);
     nodeTraversalCircular(head1);
 }
