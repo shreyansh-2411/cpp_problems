@@ -200,6 +200,18 @@ node* segregateOddEven(node* head){
     return even;
 }
 
+//function to reverse a linked list in pairs
+node* reverseInPairs(node* head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    node* newHead= head->next;
+    node* temp= head->next->next;
+    head->next->next= head;
+    head->next= reverseInPairs(temp);
+    return newHead;
+}
+
 int main(){
     node* head= NULL;
     head= insertAtStart(head,10);
@@ -248,5 +260,8 @@ int main(){
     nodeTraversal(head1);
     // segregating odds and evens in a linked list
     head1= segregateOddEven(head1);
+    nodeTraversal(head1);
+    // reverse a linked list in pairs
+    head1= reverseInPairs(head1);
     nodeTraversal(head1);
 }
